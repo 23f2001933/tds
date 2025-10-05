@@ -22,8 +22,8 @@ jobs:
         with:
           path: ~/.cache/pip
           key: cache-5e20bc3
-          restore-keys: |
-            cache-5e20bc3
+          restore-keys:
+            - cache-5e20bc3
 
       - name: Install dependencies
         run: |
