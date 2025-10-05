@@ -14,13 +14,13 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.12"
+          python-version: '3.12'
 
-      - name: Cache dependencies
+      - name: Cache pip dependencies
         id: prime-cache-5e20bc3
         uses: actions/cache@v4
         with:
-          path: ~/.cache/pip
+          path: ${{ runner.os }}-pip-cache
           key: cache-5e20bc3
           restore-keys:
             - cache-5e20bc3
