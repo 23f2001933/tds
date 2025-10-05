@@ -1,0 +1,40 @@
+name: Dependency Cache Demo
+
+on:
+  workflow_dispatch:  # Manual trigger
+  push:
+    branches: [main]
+
+jobs:
+  cache-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Cache dependencies
+        id: cache-step
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: cache-5e20bc3
+          restore-keys: |
+            cache-5e20bc3
+
+      - name: prime-cache-5e20bc3
+        run: |
+          if [ -n "${{ steps.cache-step.outputs.cache-hit }}" ]; then
+            echo "Cache hit!"
+          else
+            echo "Cache miss!"
+          fi
+
+      - name: Install dependencies
+        run: |
+          pip install requests
